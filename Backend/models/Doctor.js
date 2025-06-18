@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Define time slot availability for  single day
+// Define time slot availability for a single day
 const availabilitySchema = new mongoose.Schema({
   date: {
     type: Date,
@@ -16,9 +16,9 @@ const availabilitySchema = new mongoose.Schema({
 
 // Appointment schema
 const appointmentSchema = new mongoose.Schema({
-  userId: {
+  patientId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Patient", 
     required: true,
   },
   clinicId: {
@@ -89,15 +89,15 @@ const doctorSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "doctor", "admin"],
+      enum: ["patient", "doctor", "admin"],
       default: "doctor",
     },
     profileImage: {
       type: String, // Cloudinary image URL
     },
 
-    availability: [availabilitySchema], // Calendar based availability
-    appointments: [appointmentSchema], // All appointment details
+    availability: [availabilitySchema], // Calendar-based availability
+    appointments: [appointmentSchema], // Appointment details
 
     isAvailable: {
       type: Boolean,

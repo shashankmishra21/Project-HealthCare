@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Appointment schema inside patient
 const appointmentSchema = new mongoose.Schema({
   doctorId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -31,7 +32,7 @@ const appointmentSchema = new mongoose.Schema({
   },
 });
 
-const userSchema = new mongoose.Schema(
+const patientSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -63,8 +64,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "doctor", "admin"],
-      default: "user",
+      enum: ["patient", "doctor", "admin"],
+      default: "patient",
     },
     appointments: [appointmentSchema],
 
@@ -83,4 +84,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Patient", patientSchema);
